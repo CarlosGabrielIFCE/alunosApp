@@ -1,4 +1,4 @@
-# alunosApp
+# Alunos App
 
 This is a Student CRUD App developed using integration between Ionic and Firebase
 
