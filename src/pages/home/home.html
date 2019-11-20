@@ -1,18 +1,42 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Lista de Alunos Cadastrados
+    </ion-title>
   </ion-navbar>
 </ion-header>
-
+ 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+ 
+  <ion-list>
+    <ion-item-sliding *ngFor="let student of students | async">
+      <ion-item>
+        <h1>{{ student.nomeCompleto }}</h1>
+        <h2>Data de Nascimento: {{ student.dataNascimento }}</h2>
+        <h2>Nome do Responsável: {{ student.nomeResponsavel }}</h2>
+        <h2>Telefone do Responsável: {{ student.telResponsavel }}</h2>
+        <h2>Curso: {{ student.curso }}</h2>
+        <p>{{ student.cep }}, {{ student.nrEndereco }}, {{ student.complemento }}, {{ student.municipio }} - {{ student.UF }}</p>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="secondary" (click)="editStudent(student)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button color="danger" (click)="removeStudent(student.key)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+ 
+  <ion-fab bottom right>
+    <button ion-fab color="primary" (click)="newStudent()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
